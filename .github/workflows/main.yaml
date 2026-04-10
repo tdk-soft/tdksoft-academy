@@ -35,12 +35,12 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: backend/Dockerfile
+          context: ./tdksoftonline
+          file: ./tdksoftonline/backend/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/tdk-backend:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/tdk-backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/tdkacademy-backend:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/tdkacademy-backend:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
 

@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies in a local folder
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
 
@@ -26,9 +26,10 @@ WORKDIR /app
 COPY --from=builder /install /usr/local
 
 # Copy the application code
-COPY ./app ./app
+COPY backend/app ./app
 # Copy the frontend static files (since FastAPI serves them)
-COPY ../frontend /frontend
+COPY frontend ./frontend
+
 
 # Create a non-privileged user for security (Google Best Practice)
 RUN adduser --disabled-password --gecos "" tdkuser
