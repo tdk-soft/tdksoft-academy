@@ -14,3 +14,14 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     const result = await res.json();
     document.getElementById('response').innerText = result.detail;
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const ctaButtons = document.querySelectorAll('.cta-btn');
+
+    ctaButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            console.log("🚀 Un parent a cliqué sur le bouton de réservation !");
+            // Ici, tu pourras ajouter un tag Google Analytics ou Facebook Pixel plus tard
+        });
+    });
+});
