@@ -54,6 +54,7 @@ jobs:
 
       - name: Deploy Manifests to Cluster
         run: |
+          cd tdksoftonline
           # Apply Namespace first to ensure logical isolation
           kubectl apply -f k8s/namespace.yaml
           
@@ -66,7 +67,7 @@ jobs:
         run: |
           # OOP Approach: Atomic update of the deployment image
           # Using commit SHA for precise versioning and easy rollbacks
-          kubectl set image deployment/tdk-backend backend=${{ secrets.DOCKER_USERNAME }}/tdk-backend:${{ github.sha }} -n tdk-soft
+          kubectl set image deployment/tdk-backend backend=${{ secrets.DOCKER_USERNAME }}/tdkacademy-backend:${{ github.sha }} -n tdk-soft
           
           # Wait for deployment success with a 5-minute timeout (Google Std)
           kubectl rollout status deployment/tdk-backend -n tdk-soft --timeout=300s

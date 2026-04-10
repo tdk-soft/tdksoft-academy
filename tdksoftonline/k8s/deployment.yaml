@@ -14,7 +14,7 @@ spec:
         app: tdk-site
     spec:
       containers:
-      - name: backend # Ce nom doit correspondre à celui dans le 'set image'
-        image: python:3.10-slim # Image temporaire, remplacée par le CI
+      - name: backend 
+        image: python:3.10-slim # Temporary Image, ill be replace by the CI
         ports:
         - containerPort: 8000
