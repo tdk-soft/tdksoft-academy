@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - 00-namespace.yaml
+  - 01-deployment.yaml
+  - 02-service.yaml
+  - 03-ingress.yaml
+
+commonAnnotations:
+  deployed-by: kustomize
+  environment: base
+
+images:
+  - name: ghcr.io/tdk-soft/tsk-academy-cloud-native/tdk-academy-site
+    newTag: latest
+
+# Utilisation de fichiers .env pour séparer le code de la donnée
+configMapGenerator:
+  - name: ergo-config
+    envs:
+      - ./base-config.env
+
+secretGenerator:
+  - name: ergo-secrets
+    envs:
+      - ./base-secrets.env
+    options:
+      # On RÉACTIVE le hash (bonne pratique) pour forcer le restart des pods si le secret change
+      disableNameSuffixHash: false
+
+commonLabels:
+  app.kubernetes.io/managed-by: kustomize
+  app.kubernetes.io/part-of: tdk-academy-platform
+

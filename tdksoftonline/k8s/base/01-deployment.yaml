@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: tdk-backend
-  namespace: tdk-soft
 spec:
   replicas: 1
   selector:

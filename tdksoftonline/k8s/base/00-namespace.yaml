@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: tdk-soft
+  name: academy
   labels:
     name: tdk-soft
     env: production
