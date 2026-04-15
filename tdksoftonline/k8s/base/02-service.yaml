@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: tdk-service
+  name: tdk-academy-service
 spec:
   selector:
     app: tdk-site
   ports:
     - protocol: TCP
-      port: 80         # Port exposé au sein du cluster
-      targetPort: 8000 # Port sur lequel écoute ton FastAPI (Dockerfile)
+      port: 80         # Exposed port for the service in the cluster
+      targetPort: 8000 # Port on which your FastAPI listens (Dockerfile)
   type: ClusterIP

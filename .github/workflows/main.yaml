@@ -67,13 +67,13 @@ jobs:
         run: |
           # OOP Approach: Atomic update of the deployment image
           # Using commit SHA for precise versioning and easy rollbacks
-          kubectl set image deployment/tdk-backend backend=${{ secrets.DOCKER_USERNAME }}/tdkacademy-backend:${{ github.sha }} -n tdk-soft
+          kubectl set image deployment/tdk-backend backend=${{ secrets.DOCKER_USERNAME }}/tdkacademy-backend:${{ github.sha }} -n academy
           
           # Wait for deployment success with a 5-minute timeout (Google Std)
-          kubectl rollout status deployment/tdk-backend -n tdk-soft --timeout=300s
+          kubectl rollout status deployment/tdk-backend -n academy --timeout=300s
 
       - name: Post-Deployment Verification
         if: success()
         run: |
           echo "Deployment successful for commit ${{ github.sha }} on branch ${{ github.ref_name }}"
-          kubectl get pods -n tdk-soft -l app=tdk-site
+          kubectl get pods -n academy -l app=tdk-site

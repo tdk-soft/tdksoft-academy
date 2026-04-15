@@ -1,19 +1,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tdk-ingress
+  name: tdk-academy-ingress
   annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: web, websecure
-    traefik.ingress.kubernetes.io/router.tls: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - academy.tdksoftconsulting.de
   rules:
-  - host: v34924.1blu.de
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: tdk-service
-            port:
-              number: 80
+    - host: academy.tdksoftconsulting.de
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tdk-academy-service
+                port:
+                  number: 80
